@@ -122,13 +122,18 @@ void main() {
       expect(find.text('Skip'), findsOneWidget);
     });
 
-    testWidgets('CampusPayApp launches MainNavigationScreen and renders primary UI when onboarding complete', (WidgetTester tester) async {
-      await tester.pumpWidget(const CampusPayApp(initialOnboardingCompleted: true));
-      await tester.pump();
-      await tester.pump(const Duration(milliseconds: 100));
+    testWidgets(
+  'CampusPayApp shows LoginScreen when onboarding is complete',
+  (WidgetTester tester) async {
+    await tester.pumpWidget(
+      const CampusPayApp(initialOnboardingCompleted: true),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
 
-      expect(find.text('CampusPay'), findsWidgets);
-      expect(find.text('Campus Wallet'), findsWidgets);
-    });
+    expect(find.text('LOGIN'), findsOneWidget);
+    expect(find.text('SIGN UP'), findsNothing);
+  },
+);
   });
 }
